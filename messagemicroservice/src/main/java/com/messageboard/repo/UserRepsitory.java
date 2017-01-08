@@ -1,17 +1,13 @@
 package com.messageboard.repo;
 
-import java.util.List;
-
 import org.springframework.data.repository.CrudRepository;
-import org.springframework.data.repository.query.Param;
 import org.springframework.data.rest.core.annotation.RestResource;
 
-import com.messageboard.domain.Message;
+import com.messageboard.domain.User;
 
-public interface MessageRepository extends CrudRepository<Message, Integer> {
+public interface UserRepsitory extends CrudRepository<User, Integer> {
 
-	List<Message> findByUserName(@Param("user") String name);
-
+	
 	// Do not expose delete methods
 	@Override
 	@RestResource(exported = false)
@@ -19,11 +15,9 @@ public interface MessageRepository extends CrudRepository<Message, Integer> {
 
 	@Override
 	@RestResource(exported = false)
-	void delete(Message arg0);
+	void delete(User arg0);
 	
 	@Override
 	@RestResource(exported = false)
-	void delete(Iterable<? extends Message> arg0);
-	
-
+	void delete(Iterable<? extends User> arg0);
 }

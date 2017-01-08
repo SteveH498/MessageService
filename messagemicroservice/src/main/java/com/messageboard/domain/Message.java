@@ -6,6 +6,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Message implements Serializable {
@@ -20,24 +22,31 @@ public class Message implements Serializable {
 	private Integer id;
 
 	@Column
-	private String user;
-
-	@Column
 	private String message;
 
-	public Message(String user, String message) {
+	@ManyToOne
+	private User user;
+
+	@OneToOne
+	private Board board;
+
+	public Message(User user, Board board, String message) {
 		super();
 		this.user = user;
 		this.message = message;
+		this.board = board;
 	}
 
 	protected Message() {
 
 	}
 
-	@Override
-	public String toString() {
-		return "Message [id=" + id + ", user=" + user + ", message=" + message + "]";
+	public Board getBoard() {
+		return board;
+	}
+
+	public void setBoard(Board board) {
+		this.board = board;
 	}
 
 	public Integer getId() {
@@ -48,11 +57,11 @@ public class Message implements Serializable {
 		this.id = id;
 	}
 
-	public String getUser() {
+	public User getUser() {
 		return user;
 	}
 
-	public void setUser(String user) {
+	public void setUser(User user) {
 		this.user = user;
 	}
 
@@ -62,6 +71,11 @@ public class Message implements Serializable {
 
 	public void setMessage(String message) {
 		this.message = message;
+	}
+
+	@Override
+	public String toString() {
+		return "Message [id=" + id + ", user=" + user + ", message=" + message + "]";
 	}
 
 }
