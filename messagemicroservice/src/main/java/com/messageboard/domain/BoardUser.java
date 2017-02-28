@@ -14,7 +14,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.JoinColumn;;
 
 @Entity
-public class User implements Serializable {
+public class BoardUser implements Serializable {
 
 	/**
 	 * 
@@ -34,21 +34,21 @@ public class User implements Serializable {
 	@Column(unique = true)
 	private String passwordHash;
 
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "user")
-	private List<Message> messages;
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "boardUser")
+	private List<BoardMessage> boardMessages;
 
-	@ManyToMany
+	@ManyToMany // (mappedBy = "boardUsers")
 	@JoinTable(name = "User_Board", joinColumns = @JoinColumn(name = "User_Id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "Board_Id", referencedColumnName = "id"))
 	private List<Board> boards;
 
-	public User(String name, String email, String passwordHash) {
+	public BoardUser(String name, String email, String passwordHash) {
 		super();
 		this.name = name;
 		this.email = email;
 		this.passwordHash = passwordHash;
 	}
 
-	protected User() {
+	protected BoardUser() {
 
 	}
 
@@ -85,12 +85,12 @@ public class User implements Serializable {
 	}
 	
 	
-	public List<Message> getMessages() {
-		return messages;
+	public List<BoardMessage> getBoardMessages() {
+		return boardMessages;
 	}
 
-	public void setMessages(List<Message> messages) {
-		this.messages = messages;
+	public void setBoardMessages(List<BoardMessage> boardMessages) {
+		this.boardMessages = boardMessages;
 	}
 
 	public List<Board> getBoards() {

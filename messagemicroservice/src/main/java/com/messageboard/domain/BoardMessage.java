@@ -10,7 +10,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 @Entity
-public class Message implements Serializable {
+public class BoardMessage implements Serializable {
 
 	/**
 	 * 
@@ -22,22 +22,22 @@ public class Message implements Serializable {
 	private Integer id;
 
 	@Column
-	private String message;
+	private String boardMessage;
 
 	@ManyToOne
-	private User user;
+	private BoardUser boardUser;
 
 	@OneToOne
 	private Board board;
 
-	public Message(User user, Board board, String message) {
+	public BoardMessage(BoardUser boardUser, Board board, String boardMessage) {
 		super();
-		this.user = user;
-		this.message = message;
+		this.boardUser = boardUser;
+		this.boardMessage = boardMessage;
 		this.board = board;
 	}
 
-	protected Message() {
+	protected BoardMessage() {
 
 	}
 
@@ -57,25 +57,25 @@ public class Message implements Serializable {
 		this.id = id;
 	}
 
-	public User getUser() {
-		return user;
+	public BoardUser getBoardUser() {
+		return boardUser;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setBoardUser(BoardUser boardUser) {
+		this.boardUser = boardUser;
 	}
 
-	public String getMessage() {
-		return message;
+	public String getBoardMessage() {
+		return boardMessage;
 	}
 
-	public void setMessage(String message) {
-		this.message = message;
+	public void setBoardMessage(String boardMessage) {
+		this.boardMessage = boardMessage;
 	}
 
 	@Override
 	public String toString() {
-		return "Message [id=" + id + ", user=" + user + ", message=" + message + "]";
+		return "Message [id=" + id + ", user=" + boardUser + ", message=" + boardMessage + "]";
 	}
 
 }

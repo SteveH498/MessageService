@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.messageboard.domain.Board;
-import com.messageboard.domain.Message;
-import com.messageboard.domain.User;
+import com.messageboard.domain.BoardMessage;
+import com.messageboard.domain.BoardUser;
 import com.messageboard.repo.MessageRepository;
 
 /*
@@ -24,16 +24,16 @@ public class MessageService {
 		this.messageRepository = messageRepository;
 	}
 
-	public void createMessage( User user, Board board, String message) {
-		messageRepository.save(new Message(user, board, message));
+	public void createMessage( BoardUser user, Board board, String message) {
+		messageRepository.save(new BoardMessage(user, board, message));
 	}
 
-	public Iterable<Message> getAllMessages() {
+	public Iterable<BoardMessage> getAllMessages() {
 		return messageRepository.findAll();
 	}
 
-	public List<Message> getAllMessagesOfUser(String name) {
-		return messageRepository.findByUserName(name);
+	public List<BoardMessage> getAllMessagesOfUser(String name) {
+		return messageRepository.findByBoardUserName(name);
 	}
 
 	public long total() {

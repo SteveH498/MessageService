@@ -3,9 +3,12 @@ package com.messageboard.repo;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.rest.core.annotation.RestResource;
 
-import com.messageboard.domain.User;
+import com.messageboard.domain.BoardUser;
 
-public interface UserRepsitory extends CrudRepository<User, Integer> {
+public interface UserRepsitory extends CrudRepository<BoardUser, Integer> {
+	
+	
+	BoardUser findByName(String name);
 
 	
 	// Do not expose delete methods
@@ -15,9 +18,9 @@ public interface UserRepsitory extends CrudRepository<User, Integer> {
 
 	@Override
 	@RestResource(exported = false)
-	void delete(User arg0);
+	void delete(BoardUser arg0);
 	
 	@Override
 	@RestResource(exported = false)
-	void delete(Iterable<? extends User> arg0);
+	void delete(Iterable<? extends BoardUser> arg0);
 }

@@ -29,11 +29,11 @@ public class Board implements Serializable {
 	private String title;
 
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "board")
-	private List<Message> messages;
+	private List<BoardMessage> boardMessages;
 
-	@ManyToMany
-	@JoinTable(name = "User_Board", joinColumns = @JoinColumn(name = "User_Id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "Board_Id", referencedColumnName = "id"))
-	private List<User> users;
+	@ManyToMany(mappedBy = "boards")
+	//@JoinTable(name = "User_Board", joinColumns = @JoinColumn(name = "User_Id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "Board_Id", referencedColumnName = "id"))
+	private List<BoardUser> boardUsers;
 
 	public Board(String title) {
 		super();
@@ -60,26 +60,26 @@ public class Board implements Serializable {
 		this.title = title;
 	}
 
-	public List<Message> getMessages() {
-		return messages;
+	public List<BoardMessage> getBoardMessages() {
+		return boardMessages;
 	}
 
-	public void setMessages(List<Message> messages) {
-		this.messages = messages;
+	public void setBoardMessages(List<BoardMessage> boardMessages) {
+		this.boardMessages = boardMessages;
 	}
 
-	public List<User> getUsers() {
-		return users;
+	public List<BoardUser> getBoardUsers() {
+		return boardUsers;
 	}
 
-	public void setUsers(List<User> users) {
-		this.users = users;
+	public void setBoardUsers(List<BoardUser> boardUsers) {
+		this.boardUsers = boardUsers;
 	}
 	
 	
-	public void addUser(User user){
-		if(this.users != null){
-			this.users.add(user);
+	public void addBoardUser(BoardUser boardUser){
+		if(this.boardUsers != null){
+			this.boardUsers.add(boardUser);
 		}		
 	}
 
